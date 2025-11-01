@@ -85,7 +85,7 @@ const Hero: React.FC = () => {
       <div
         className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat parallax-effect"
         style={{
-          backgroundImage: `url(https://i.ibb.co/BVYDvQD0/Messenger-creation-3-E96-C518-E84-B-428-E-AC5-D-38-F710052659.jpg)`,
+          backgroundImage: `url()`,
           transform: `translateY(${offsetY * 0.4}px) scale(${1 + offsetY / 5000})`,
           willChange: 'transform',
         }}
@@ -123,7 +123,7 @@ const Hero: React.FC = () => {
             onClick={() => scrollToSection('note')}
             className="px-6 py-3 text-base sm:px-8 sm:text-lg font-semibold rounded-full bg-pink-500/80 backdrop-blur-sm text-white border border-pink-400 hover:bg-pink-500 transition-transform duration-300 transform hover:scale-105 shadow-lg animate-button-pulse delay-buttons-pulse"
           >
-            Message from Tajwar
+            Message from Yajas
           </button>
         </div>
       </div>

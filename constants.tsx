@@ -36,6 +36,30 @@ export const stories: Story[] = [
     caption: 'In your eyes, I see my home forever.',
     date: '',
   },
+  {
+    id: 5,
+    imageUrl: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=1200&q=80&auto=format&fit=crop',
+    caption: 'Sunset walks together',
+    date: '',
+  },
+  {
+    id: 6,
+    imageUrl: 'https://images.unsplash.com/photo-1503002778224-6d7f3f9a9c2d?w=1200&q=80&auto=format&fit=crop',
+    caption: 'Our little traditions',
+    date: '',
+  },
+  {
+    id: 7,
+    imageUrl: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=80&auto=format&fit=crop',
+    caption: 'Laughing till dawn',
+    date: '',
+  },
+  {
+    id: 8,
+    imageUrl: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=1200&q=80&auto=format&fit=crop',
+    caption: 'Small moments, big love',
+    date: '',
+  },
   // Add more stories here if you like
 ];
 

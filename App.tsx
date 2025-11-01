@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import Hero from './components/Hero';
 import Stories from './components/Stories';
-import Timeline from './components/Timeline';
 import LoveNote from './components/LoveNote';
 import Footer from './components/Footer';
 import Lightbox from './components/Lightbox';
@@ -63,7 +62,6 @@ const App: React.FC = () => {
             <main className="relative z-10">
                 <Hero />
                 <Stories onImageClick={openLightbox} />
-                <Timeline />
                 <LoveNote />
                 <Footer />
             </main>

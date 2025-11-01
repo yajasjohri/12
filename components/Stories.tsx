@@ -6,9 +6,8 @@ interface StoriesProps {
 }
 
 const getSlidesPerView = () => {
-    if (typeof window === 'undefined') return 1;
-    if (window.innerWidth >= 1024) return 3;
-    if (window.innerWidth >= 768) return 2;
+    // Force one slide visible at a time for a stronger single-image effect
+    // across all viewport sizes.
     return 1;
 };
 
@@ -46,13 +45,17 @@ const Stories: React.FC<StoriesProps> = ({ onImageClick }) => {
         setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1));
     }, [maxIndex]);
 
+    // Auto-scroll interval (milliseconds). Set to 3000ms (3 seconds) for a faster
+    // carousel rhythm as requested.
+    const AUTO_SCROLL_INTERVAL = 3000;
+
     useEffect(() => {
         resetTimeout();
         const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
         if (!isPaused && stories.length > slidesPerView && !mediaQuery.matches) {
             timeoutRef.current = window.setTimeout(() => {
                 nextSlide();
-            }, 3000);
+            }, AUTO_SCROLL_INTERVAL);
         }
         return () => {
             resetTimeout();
@@ -89,10 +92,11 @@ const Stories: React.FC<StoriesProps> = ({ onImageClick }) => {
     const handleMouseLeave = () => setIsPaused(false);
 
     return (
-        <section id="stories" className="py-20 bg-transparent">
+        // Make the stories section larger so the carousel fills most of the viewport
+        <section id="stories" className="py-8 bg-transparent min-h-[75vh] flex items-center">
             <div className="container mx-auto px-4 text-center">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">Our Story in Pictures</h2>
-                <p className="max-w-3xl mx-auto text-lg text-gray-300 mb-12">
+                <p className="max-w-3xl mx-auto text-lg text-gray-300 mb-8">
                     A collection of moments from our incredible year together.
                 </p>
                 <div 
@@ -118,23 +122,26 @@ const Stories: React.FC<StoriesProps> = ({ onImageClick }) => {
                                 >
                                     <figure
                                         onClick={() => onImageClick(index)}
-                                        className="cursor-pointer relative group aspect-video w-full"
+                                        className="cursor-pointer relative group w-full"
                                         aria-label={`View image: ${story.caption}`}
                                         role="button"
                                         tabIndex={0}
                                         onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onImageClick(index)}
                                     >
-                                        <img
-                                            src={story.imageUrl}
-                                            srcSet={story.imageSrcSet}
-                                            sizes={
-                                                slidesPerView === 1 ? '100vw' :
-                                                slidesPerView === 2 ? '50vw' : '33vw'
-                                            }
-                                            alt={story.caption}
-                                            className="w-full h-full object-cover rounded-2xl shadow-2xl"
-                                            loading="lazy"
-                                        />
+                                        {/* Make each slide much taller so media is larger on the page */}
+                                        <div className="w-full h-[60vh] md:h-[70vh] lg:h-[80vh] rounded-2xl overflow-hidden shadow-2xl bg-black">
+                                            <img
+                                                src={story.imageUrl}
+                                                srcSet={story.imageSrcSet}
+                                                sizes={
+                                                    slidesPerView === 1 ? '100vw' :
+                                                    slidesPerView === 2 ? '50vw' : '33vw'
+                                                }
+                                                alt={story.caption}
+                                                className="w-full h-full object-cover"
+                                                loading="lazy"
+                                            />
+                                        </div>
                                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300 rounded-2xl flex items-end p-4 md:p-6">
                                             <div>
                                                 <p className="text-white text-lg md:text-xl font-bold">{story.caption}</p>

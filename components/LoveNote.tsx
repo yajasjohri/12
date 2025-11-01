@@ -31,9 +31,7 @@ const LoveNote: React.FC = () => {
     };
   }, []);
 
-  const message = `Thank you for the most incredible first year. I cherish every moment and I can't wait to see what the future holds for us. One year down, a lifetime to go.
-I love you more than words can say.
-With All My Heart`;
+  const message = `Hey SHUBBHU. Im sorry for everytime Ive made you cryor feel sad. You are so fucking perfect and I hate when I make you sad. You deserve the world. I really wish I become the Gukesh your parents want and the person you want to spend your life together.`;
 
   // Split the message into words and whitespace to preserve formatting
   const messageParts = message.split(/(\s+)/);
@@ -143,7 +141,7 @@ With All My Heart`;
               fade-in-child ${isVisible ? 'is-visible' : ''}`}
             style={{ transitionDelay: `${signatureDelay}ms`}}
           >
-            -Your Tajwar&lt;3
+            -Your Yajas&lt;3
           </p>
         </div>
       </div>
