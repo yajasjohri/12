@@ -4,64 +4,35 @@ import HeartIcon from './components/icons/HeartIcon';
 import CalendarIcon from './components/icons/CalendarIcon';
 import GiftIcon from './components/icons/GiftIcon';
 
-// To edit the page content, change the values below.
+// Automatically pick up to 5 images from the `photos/` folder using Vite's glob.
+// Place your images (jpg, jpeg, png, webp, svg) into `One-Year-Anniversary/photos/`.
+// You can change captions in `captionOverrides` below; filenames are discovered
+// automatically so you only need to add/remove files in the folder.
+const photoEntries = Object.entries(
+  (import.meta as any).glob('./photos/*.{jpg,jpeg,png,webp,svg}', { eager: true, as: 'url' })
+) as Array<[string, string]>;
 
-// -- STORIES SECTION --
-// Replace image URLs, captions, and dates for the stories carousel.
-// For better performance on different devices, provide multiple image sizes in `imageSrcSet`.
-// e.g., imageSrcSet: 'https://path/to/image-400w.jpg 400w, https://path/to/image-800w.jpg 800w'
-export const stories: Story[] = [
-  {
-    id: 1,
-    imageUrl: 'https://i.ibb.co/v6LmWDbc/Messenger-creation-5-B373-FEE-4-BF1-48-CE-9910-3-B80891-E331-C.jpg',
-    // imageSrcSet: '...',
-    caption: 'My favourite picture',
-    date: '',
-  },
-  {
-    id: 2,
-    imageUrl: 'https://i.ibb.co/CKj9SV34/Messenger-creation-5-B60-AFC2-F209-4-AD9-878-F-665693-A693-CC.jpg',
-    caption: 'The day I made you mine forever',
-    date: '',
-  },
-  {
-    id: 3,
-    imageUrl: 'https://i.ibb.co/gMZCH22G/Messenger-creation-8095-CB82-E5-AC-4-CDD-8876-FB20-C94-FF68-B.jpg',
-    caption: 'Even silence speaks when you are with me',
-    date: '',
-  },
-  {
-    id: 4,
-    imageUrl: 'https://i.ibb.co/0yV7r9QD/Messenger-creation-9-BAA67-F7-D688-491-C-ACA6-C59-E38210373.jpg',
-    caption: 'In your eyes, I see my home forever.',
-    date: '',
-  },
-  {
-    id: 5,
-    imageUrl: 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Sunset walks together',
-    date: '',
-  },
-  {
-    id: 6,
-    imageUrl: 'https://images.unsplash.com/photo-1503002778224-6d7f3f9a9c2d?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Our little traditions',
-    date: '',
-  },
-  {
-    id: 7,
-    imageUrl: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Laughing till dawn',
-    date: '',
-  },
-  {
-    id: 8,
-    imageUrl: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=1200&q=80&auto=format&fit=crop',
-    caption: 'Small moments, big love',
-    date: '',
-  },
-  // Add more stories here if you like
+// Sort by filename so the order is predictable (alphabetical).
+photoEntries.sort((a, b) => a[0].localeCompare(b[0]));
+
+// Extract URLs and take first five images
+const photoUrls = photoEntries.map(([_, url]) => url).slice(0, 5);
+
+// Edit these captions to change what displays for each photo (index matches photoUrls).
+export const captionOverrides: string[] = [
+  'day I made you mine',
+  'prettiest eyes',
+  'fav photo',
+  'cutest',
+  'fatest couple',
 ];
+
+export const stories: Story[] = photoUrls.map((url, i) => ({
+  id: i + 1,
+  imageUrl: url,
+  caption: captionOverrides[i] || `Photo ${i + 1}`,
+  date: '',
+}));
 
 // -- TIMELINE SECTION --
 // Replace dates, titles, and descriptions for the timeline highlights.
